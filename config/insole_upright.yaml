@@ -13,7 +13,7 @@ other:
   - rosrun activity_detector walking_id_detector.py _side:=right
 
 main_nodes:
-  - roslaunch test_moticon_insoles show_urdf_everything.launch use_gui:=false
+  - roslaunch moticon_insoles show_urdf_everything.launch use_gui:=false
 #"roslaunch ximu3_ros ximu_lower.launch do_calibration:=true parent_frame_id:=subject_heading wait_to_start:=true"
   - roslaunch ximu3_ros ximu_lower_upright.launch do_calibration:=true wait_to_start:=true
   - roslaunch osrt_ros t46.launch bypass_heading_computation:=false heading_debug:=0 visualise:=false orientation_server_type:=tf
