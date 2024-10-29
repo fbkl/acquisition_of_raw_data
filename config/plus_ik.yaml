@@ -1,7 +1,7 @@
 main_nodes:
   - roslaunch moticon_insoles show_urdf_everything.launch use_gui:=false
 #"roslaunch ximu3_ros ximu_lower.launch do_calibration:=true parent_frame_id:=subject_heading wait_to_start:=true"
-  - roslaunch osrt_ros t46.launch bypass_heading_computation:=false heading_debug:=0 visualise:=false orientation_server_type:=tf model_file:=$MODEL_FILE
+  - roslaunch osrt_ros t46.launch bypass_heading_computation:=false heading_debug:=0 visualise:=false orientation_server_type:=tf model_file:=$MODEL_FILE use_ar:=$USE_AR
   - if [ "${COMBINED_ACQUISITION}" = False ] ; then rosrun rqt_runtime_monitor rqt_runtime_monitor; fi
   - if [ "${COMBINED_ACQUISITION}" = False ] ; then rosrun rqt_reconfigure     rqt_reconfigure    ; fi
 #  - if [ "${COMBINED_ACQUISITION}" = True ] ;  then rqt --perspective-file /catkin_ws/src/ros_biomech/acquisition_state_machines/rqt_acquisition/Control_Acquisition_small_tabs.perspective    ; fi
