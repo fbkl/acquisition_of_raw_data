@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<launch>
+	<arg name="topics_to_read" value="['/id_node/output_multi','/so_rr_node/output_multi','/tf','/tf_static']"/>
+	<node name="ros_bag_recorder" type="controllable_bag_recorder.py" pkg="acquisition_of_raw_data" output="screen">
+		<param name="topics_to_read" value="$(arg topics_to_read)"/>
+	</node>
+</launch>
+
+

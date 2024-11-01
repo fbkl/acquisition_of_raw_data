@@ -1,3 +1,4 @@
 id_nodes:
-  - if [ "${SHOW_VIZ_OTHER}" = true ] ; then roslaunch osrt_ros vis_id.launch model_file:=$MODEL_FILE; fi 
+  - if [ "${RECORD_ROSBAG}" = True ] ; then roslaunch acquisition_of_raw_data rosbag_controllable_recorder.launch _topics_to_read:=['/id','/tf','/rosout']; fi 
+  - if [ "${SHOW_VIZ_OTHER}" = True ] ; then roslaunch osrt_ros vis_id.launch model_file:=$MODEL_FILE; fi 
   - roslaunch osrt_ros id_async_filtered2.launch get_second_label:=false left_foot_tf_name:=left_cop_filtered right_foot_tf_name:=right_cop_filtered max_buffer_length:=1000 ik_delay:=0.26 model_file:=$MODEL_FILE --wait 
