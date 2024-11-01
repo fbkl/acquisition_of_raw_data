@@ -1,5 +1,5 @@
 main_nodes:
-  - roslaunch moticon_insoles show_urdf_everything.launch use_gui:=false
+  #- roslaunch moticon_insoles show_urdf_everything.launch use_gui:=false
 #"roslaunch ximu3_ros ximu_lower.launch do_calibration:=true parent_frame_id:=subject_heading wait_to_start:=true"
   - roslaunch osrt_ros ik_lowerbody_inverted_pelvis.launch ik_node_name:=ik tf_prefix:=ik/ bypass_heading_computation:=false heading_debug:=0 visualise:=false orientation_server_type:=tf model_file:=$MODEL_FILE use_ar:=$USE_AR
   - if [ "${COMBINED_ACQUISITION}" = False ] ; then rosrun rqt_runtime_monitor rqt_runtime_monitor; fi
