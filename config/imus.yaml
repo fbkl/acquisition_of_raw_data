@@ -1,5 +1,5 @@
 imu_viz:
-  - rviz -d /catkin_ws/src/ros_biomech/ximu3_ros/ximu_line.rviz 
+  - if [ "${SHOW_VIZ_OTHER}" = True ] ; then  rviz -d /catkin_ws/src/ros_biomech/ximu3_ros/ximu_line.rviz ; fi
   - roslaunch ximu3_ros upright.launch
 
 imu_nodes:
