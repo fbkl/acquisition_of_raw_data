@@ -14,11 +14,8 @@ from std_srvs.srv import Empty, EmptyRequest, EmptyResponse
 from concurrent.futures import ThreadPoolExecutor
 
 
-def wait_then_call(service_name, service_type,persistent,headers):
-    rospy.wait_for_service()
-
 # from https://gist.github.com/jbohren/e33247f7675b5dab05543637098a538b
-class AsyncServiceProxy(object):
+class AsyncWaitingServiceProxy(object):
     """Asynchronous ROS service proxy
 
     Example 1:
@@ -44,43 +41,48 @@ class AsyncServiceProxy(object):
         while not fut.done():
             print('Waiting...')
     """
+    def complete_call(self):
+        rospy.wait_for_service(self.service_name)
+        self.service_proxy.call()
 
     def __init__(self, service_name, service_type, persistent=True,
             headers=None, callback=None):
         """Create an asynchronous service proxy."""
 
+        self.service_name =  service_name
         self.executor = ThreadPoolExecutor(max_workers=10)
         self.service_proxy = rospy.ServiceProxy(
                 service_name,
                 service_type,
                 persistent,
                 headers)
+
         self.callback = callback
 
     def __call__(self, *args, **kwargs):
         """Get a Future corresponding to a call of this service."""
 
-        fut = self.executor.submit(self.service_proxy.call, *args, **kwargs)
+        fut = self.executor.submit(self.complete_call, *args, **kwargs)
         if self.callback is not None:
             fut.add_done_callback(self.callback)
 
         return fut
 
 
-class MultiServiceCaller:
-    """MultiServiceCaller
+class WaitingMultiServiceCaller:
+    """WaitingMultiServiceCaller
 
         Calls multiple services in parallel (non-blocking)
         
     """
-    def __init__(self, list_services_, srvMsgType = Empty(), srvMsgTypeResponse = EmptyResponse(), wait_for_responses = False):
+    def __init__(self, list_services_, srvMsgType = Empty(), srvMsgTypeResponse = EmptyResponse(), wait_to_start=True, wait_for_responses = False, timeout = rospy.Duration(1)):
         rospy.logwarn_once("this can be quite slow. also maybe the services are blocking, ..")
         self.list_of_services = {}
         self.error_list =[]
         self.wait_for_responses = wait_for_responses ## if set to true, it is very slow
         self.response = srvMsgTypeResponse
         for a_srv_name in list_services_:
-            self.list_of_services.update({a_srv_name:AsyncServiceProxy(a_srv_name, srvMsgType )})
+            self.list_of_services.update({a_srv_name:AsyncWaitingServiceProxy(a_srv_name, srvMsgType )})
     def __call__(self, srvMsg):
         response_list = []
         self.error_list =[]
@@ -102,7 +104,7 @@ class MultiServiceCaller:
 
 def main():
     rospy.init_node("ms")
-    aMulti = MultiServiceCaller(
+    aMulti = WaitingMultiServiceCaller(
             ["/ximu_torso/start_now",
                 "/ximu_pelvis/start_now",
                 "/ximu_femur_l/start_now",
