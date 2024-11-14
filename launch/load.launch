@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<launch>
+	<node name="load_behavior" type="delay_publisher.py" pkg="acquisition_of_raw_data" output="screen" >
+		<param name="msg_type" 		value="flexbe_msgs/UICommand"/>
+		<rosparam param="msg_contents">
+command: "load Acquire_Everything"
+key: ""
+</rosparam>
+		<param name="topic" 		value="/flexbe/uicommand"/>
+		<param name="delay" 		value="5"/>
+	</node>
+
+</launch>
+

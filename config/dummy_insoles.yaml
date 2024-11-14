@@ -1,0 +1,7 @@
+insole_nodes:
+  - roslaunch moticon_insoles read_nothing.launch foot_length:=${FOOT_LENGTH} foot_width:=${FOOT_WIDTH} grf_origin_z_offset:=$GRF_ORIGIN_Z_OFFSET tf_prefix:=ik/ --wait
+  - if [ "${SHOW_VIZ_OTHER}" = True ] ; then  rosrun plotjuggler plotjuggler --layout /catkin_ws/plotjuggler_layout.xml --start_streamer libDataStreamROS; fi
+  - roslaunch diagnostics_schema everything.launch
+  - rosrun activity_detector walking_id_detector.py _side:=left
+  - rosrun activity_detector walking_id_detector.py _side:=right
+  - roslaunch republisher republisher_insoles.launch --wait

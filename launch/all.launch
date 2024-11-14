@@ -12,7 +12,6 @@
 		<param name="session_name" value="$(arg session_name)"/>
 
 	</node>
-	<node name="load_behavior" type="rostopic" pkg="rostopic" output="screen" args="pub /flexbe/uicommand flexbe_msgs/UICommand '{command: &quot;load Acquire_Everything&quot;, key: &quot;&quot;}' "/>
-
+	<include file="$(find acquisition_of_raw_data)/launch/load.launch"/>
 </launch>
 
