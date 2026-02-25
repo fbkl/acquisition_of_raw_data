@@ -1,0 +1,14 @@
+imu_viz:
+  - if [ "${SHOW_VIZ_OTHER}" = True ] ; then  rviz -d /catkin_ws/src/ros_biomech/ximu3_ros/ximu_line.rviz ; fi
+  - roslaunch ximu3_ros upright.launch
+
+imu_nodes:
+
+  - roslaunch ximu3_ros lower_torso.launch do_calibration:=true wait_to_start:=$WAIT_TO_START dummy_publisher:=$DUMMY_IMUS
+  - roslaunch ximu3_ros lower_pelvis.launch do_calibration:=true wait_to_start:=$WAIT_TO_START dummy_publisher:=$DUMMY_IMUS
+  - roslaunch ximu3_ros lower_femur_r.launch do_calibration:=true wait_to_start:=$WAIT_TO_START dummy_publisher:=$DUMMY_IMUS
+  - roslaunch ximu3_ros lower_femur_l.launch do_calibration:=true wait_to_start:=$WAIT_TO_START dummy_publisher:=$DUMMY_IMUS
+  - roslaunch ximu3_ros lower_pylon_r.launch do_calibration:=true wait_to_start:=$WAIT_TO_START dummy_publisher:=$DUMMY_IMUS
+  - roslaunch ximu3_ros lower_tibia_l.launch do_calibration:=true wait_to_start:=$WAIT_TO_START dummy_publisher:=$DUMMY_IMUS
+  - roslaunch ximu3_ros lower_foot_r.launch do_calibration:=true wait_to_start:=$WAIT_TO_START dummy_publisher:=$DUMMY_IMUS
+  - roslaunch ximu3_ros lower_talus_l.launch do_calibration:=true wait_to_start:=$WAIT_TO_START dummy_publisher:=$DUMMY_IMUS
