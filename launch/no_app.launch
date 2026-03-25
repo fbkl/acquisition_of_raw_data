@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<launch>
+	<arg name="init" value="flexbe_full.launch no_app:=true"/>
+	<arg name="session_name" value="testtt"/>
+
+	<node name="tmux_ss" type="tmux_session_manager_node.py" pkg="tmux_launch" output="screen">
+		<param name="session_name" value="$(arg session_name)"/>
+		<param name="initial_cmd" value="roslaunch flexbe_app $(arg init)"/>
+	</node>
+
+	<include file="$(find acquisition_of_raw_data)/launch/load.launch"/>
+</launch>
+
