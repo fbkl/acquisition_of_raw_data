@@ -9,5 +9,6 @@ vio_nodes:
   #- roslaunch ximu3_ros upper_radius.launch do_calibration:=true wait_to_start:=$WAIT_TO_START dummy_publisher:=$DUMMY_IMUS
   - roslaunch vio_launch namespaced.launch         machine:=rpi5-ubuntu camera:=radius visualize:=false
   - roslaunch vio_launch namespaced_rovioli.launch machine:=silver      camera:=thorax 
+  - rosrun tf static_transform_broadcaster 0 0 0 0 0 0 imu/thorax imu/humerus 100
     #- rosrun ar_test modifiable_fixed_transform_publisher.py 0 0 0  0.707 0 0 0.707 map imu/humerus 
     #- rosrun ar_test modifiable_fixed_transform_publisher.py 0 0 0  0.707 0 0 0.707 map imu/radius 
