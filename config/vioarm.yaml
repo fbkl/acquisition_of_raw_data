@@ -1,7 +1,3 @@
-viocamera_viz:
-  - if [ "${SHOW_VIZ_OTHER}" = True ] ; then  rviz -d /catkin_ws/src/ros_biomech/ximu3_ros/ximu_line.rviz ; fi
-  - roslaunch ximu3_ros upright.launch
-
 vio_nodes:
 
   #- roslaunch ximu3_ros upper_thorax.launch do_calibration:=true wait_to_start:=$WAIT_TO_START dummy_publisher:=$DUMMY_IMUS
