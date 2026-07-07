@@ -1,14 +1,14 @@
 vio_nodes:
 
-  - roslaunch vio_launch namespaced.launch         machine:=rpi5-ubuntu camera:=radius visualize:=false
-  - roslaunch vio_launch namespaced.launch         machine:=silver      camera:=thorax visualize:=false
-  - rosrun tf static_transform_broadcaster 0 0 0 0 0 0 imu/thorax imu/humerus 100
+  - roslaunch vio_launch namespaced.launch         machine:=rpi5-ubuntu camera:=radius_r visualize:=false
+  - roslaunch vio_launch namespaced.launch         machine:=silver      camera:=torso visualize:=false
+  - rosrun tf static_transform_broadcaster 0 0 0 0 0 0 imu/torso imu/humerus 100
   - roslaunch vio_launch common_frames.launch
-  - roslaunch ar_test calibrate_camera_positions.launch  camera_name:=radius
-  - roslaunch ar_test calibrate_camera_positions.launch  camera_name:=thorax
-  - roslaunch ar_test calibrate_marker.launch  camera_name:=radius
-  - roslaunch ar_test calibrate_marker.launch  camera_name:=thorax
-    #- roslaunch vio_launch namespaced_rovioli.launch machine:=rpi5-ubuntu camera:=radius 
-    #- roslaunch vio_launch namespaced_rovioli.launch machine:=silver      camera:=thorax 
+  - roslaunch ar_test calibrate_camera_positions.launch  camera_name:=radius_r
+  - roslaunch ar_test calibrate_camera_positions.launch  camera_name:=torso
+  - roslaunch ar_test calibrate_marker.launch  camera_name:=radius_r
+  - roslaunch ar_test calibrate_marker.launch  camera_name:=torso
+    #- roslaunch vio_launch namespaced_rovioli.launch machine:=rpi5-ubuntu camera:=radius_r 
+    #- roslaunch vio_launch namespaced_rovioli.launch machine:=silver      camera:=torso 
     #- rosrun ar_test modifiable_fixed_transform_publisher.py 0 0 0  0.707 0 0 0.707 map imu/humerus 
-    #- rosrun ar_test modifiable_fixed_transform_publisher.py 0 0 0  0.707 0 0 0.707 map imu/radius 
+    #- rosrun ar_test modifiable_fixed_transform_publisher.py 0 0 0  0.707 0 0 0.707 map imu/radius_r 
