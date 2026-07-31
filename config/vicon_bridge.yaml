@@ -6,5 +6,5 @@ vicon:
   - roslaunch vicon_rviz_markers vis_ik.launch model_file:=$MODEL_FILE filter_output:=$FILTER_OUT
     #machine:=main_pc_docker this is already the default machine for things to run on!
     #  - if [ "${COMBINED_ACQUISITION}" = True ] ;  then rqt --perspective-file /catkin_ws/src/ros_biomech/acquisition_state_machines/rqt_acquisition/Control_Acquisition_small_tabs.perspective    ; fi
-  - if [ "${VICON_DUMMY}" = True ] ;  then roslaunch vicon_rviz_markers yaml_markers.launch    ; fi
+  - if [ "${VICON_DUMMY}" = True ] ;  then roslaunch vicon_rviz_markers yaml_markers.launch model_file:=$MODEL_FILE    ; fi
   - rosrun vicon_rviz_markers viewer_node
