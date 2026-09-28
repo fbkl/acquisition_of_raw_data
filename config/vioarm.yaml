@@ -1,10 +1,10 @@
 vio_nodes:
 
   #  - roslaunch vio_launch namespaced.launch         machine:=rpi5-ubuntu camera:=radius_r a_UNIT::::::::::{UNIT} A_MACHINE::::{MACHINE} visualize:=false
-  - roslaunch vio_launch common_frames.launch
   - roslaunch vio_launch namespaced.launch         machine:={MACHINE}      camera:={UNIT} visualize:=false
   - roslaunch ar_test calibrate_camera_positions.launch  camera_name:={UNIT}
   - roslaunch ar_test calibrate_marker.launch  camera_name:={UNIT}
+  - roslaunch vio_launch common_frames.launch
     #- rosrun tf static_transform_broadcaster 0 0 0 0 0 0 imu/torso imu/humerus 100
     #- roslaunch vio_launch namespaced_rovioli.launch machine:=rpi5-ubuntu camera:=radius_r 
     #- roslaunch vio_launch namespaced_rovioli.launch machine:=silver      camera:=torso 

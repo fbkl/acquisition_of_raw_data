@@ -7,4 +7,6 @@ main_nodes:
  
     #machine:=main_pc_docker this is already the default machine for things to run on!
     #  - if [ "${COMBINED_ACQUISITION}" = True ] ;  then rqt --perspective-file /catkin_ws/src/ros_biomech/acquisition_state_machines/rqt_acquisition/Control_Acquisition_small_tabs.perspective    ; fi
-  - roslaunch osrt_ros testorama_lower_body.launch 
+  - roslaunch osrt_ros testorama_lower_body.launch
+  # the aggregator + host/clock pings, so the runtime monitor has Computers / Clocks / AR Markers
+  - roslaunch diagnostics_schema everything.launch
