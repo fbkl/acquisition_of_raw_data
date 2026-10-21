@@ -2,7 +2,7 @@ vio_nodes:
 
   #  - roslaunch vio_launch namespaced.launch         machine:=rpi5-ubuntu camera:=radius_r a_UNIT::::::::::{UNIT} A_MACHINE::::{MACHINE} visualize:=false
   - roslaunch vio_launch namespaced.launch         machine:={MACHINE}      camera:={UNIT} visualize:=false
-  - roslaunch ar_test calibrate_camera_positions.launch  camera_name:={UNIT}
+  - roslaunch ar_test calibrate_camera_positions.launch  camera_name:={UNIT} machine:={MACHINE}
   - roslaunch ar_test calibrate_marker.launch  camera_name:={UNIT}
   - roslaunch vio_launch common_frames.launch
     #- rosrun tf static_transform_broadcaster 0 0 0 0 0 0 imu/torso imu/humerus 100
@@ -10,3 +10,16 @@ vio_nodes:
     #- roslaunch vio_launch namespaced_rovioli.launch machine:=silver      camera:=torso 
     #- rosrun ar_test modifiable_fixed_transform_publisher.py 0 0 0  0.707 0 0 0.707 map imu/humerus 
     #- rosrun ar_test modifiable_fixed_transform_publisher.py 0 0 0  0.707 0 0 0.707 map imu/radius_r 
+
+# One tmux window of camera previews, one renderer + one viewer per unit.
+# The renderer runs ON the pi ({MACHINE}) and publishes ~12 kB of escape codes;
+# only the viewer pane has a screen, which is why both halves are here.
+#
+# PANE ARITHMETIC: create_some_windows gives 1/2/4/8 panes for 1/2/<=4/more
+# commands, and 8 is the ceiling. Two commands per unit means this window is
+# fine up to 4 units; at 5 it would ask for 10 panes, and the extra commands
+# are silently dropped rather than run. Same applies to vio_nodes above, which
+# is at 3 commands per unit plus one fixed -- it already breaks past 2 units.
+squint:
+  - roslaunch vio_launch squint.launch machine:={MACHINE} camera:={UNIT}
+  - rosrun squint squint_view _ns:=/{UNIT}/squint
