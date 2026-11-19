@@ -11,3 +11,5 @@ main_nodes:
   - roslaunch osrt_ros testorama_lower_body.launch
   # the aggregator + host/clock pings, so the runtime monitor has Computers / Clocks / AR Markers
   - roslaunch diagnostics_schema everything.launch
+  - rosrun osrt_ros pose_player.py --serve --pose parked --service /vio/ik/set_pose __ns:=vio/ik
+  - rosrun osrt_ros pose_player.py --serve --pose parked --service /vicon/ik/set_pose __ns:=vicon/ik 
